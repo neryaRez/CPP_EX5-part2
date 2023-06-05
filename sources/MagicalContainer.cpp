@@ -70,7 +70,7 @@ namespace ariel{
     MagicalContainer::Iterator& MagicalContainer::Iterator::operator=(const Iterator& other) {
 
         if(this->my_container != other.my_container) 
-            throw runtime_error("Iterators of different containers should not use assignment operator\n");
+            throw runtime_error("Iterators of different containers should not be initialized by assignment operator\n");
 
         this->index_order = other.index_order;
         this->position = other.position;
@@ -111,6 +111,9 @@ namespace ariel{
     }
 
     int MagicalContainer::Iterator::operator*() const {
+
+        if(this->index_order == this->my_container->size())
+            throw runtime_error("End should not be dereferenced\n");
 
         return this->my_container->data[static_cast<size_t> (position)];
     }
@@ -246,6 +249,9 @@ namespace ariel{
 
     }
     int MagicalContainer::PrimeIterator::operator*() const{
+
+        if(this->index_order == this->my_container->primes.size())
+            throw runtime_error("End should not be dereferenced\n");
 
         return *(this->my_container->primes[static_cast<size_t> (position)]);
     }
