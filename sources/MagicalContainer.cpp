@@ -68,8 +68,11 @@ namespace ariel{
     MagicalContainer::Iterator::~Iterator() {}
 
     MagicalContainer::Iterator& MagicalContainer::Iterator::operator=(const Iterator& other) {
+
+        if(this->my_container != other.my_container) 
+            throw runtime_error("Iterators of different containers should not use assignment operator\n");
+
         this->index_order = other.index_order;
-        this->my_container = other.my_container;
         this->position = other.position;
         this->type = other.type;
         return *this;
