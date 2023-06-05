@@ -13,13 +13,13 @@ namespace ariel{
         if (it != data.end() && *it == element) return; // If element already exists in the vector, no need to insert.  
         data.insert(it, element);  // Insert at the position determined by lower_bound.
         update_primes();
-    
     }
 
     void MagicalContainer::update_primes(){
 
         primes.clear();
-        for (size_t i = 0; i < data.size(); i++){
+        for (size_t i = 0; i < data.size(); i++)
+        {
             if(is_prime(data[i])) primes.push_back(&data[i]);
         }
     }
@@ -27,11 +27,9 @@ namespace ariel{
     void MagicalContainer::removeElement(int element){
 
         auto it = lower_bound(data.begin(), data.end(), element);
-        if(it == data.end() || *it != element) throw runtime_error("Element not found. can not be removed\n");
-        
+        if(it == data.end() || *it != element) throw runtime_error("Element not found. can not be removed\n");  
         data.erase(it);
-        update_primes();
-        
+        update_primes();  
     }
 
     int MagicalContainer::size(){
@@ -42,11 +40,9 @@ namespace ariel{
 
         if(element < 2) return false;
         int sqr = sqrt(element);
-
         for (int i = 2; i <= sqr; i++){
             if (element%i == 0) return false;    
         }
-
         return true;   
     }
 
@@ -69,12 +65,11 @@ namespace ariel{
 
     MagicalContainer::Iterator& MagicalContainer::Iterator::operator=(const Iterator& other) {
 
-        if(this->my_container != other.my_container) 
-            throw runtime_error("Iterators of different containers should not be initialized by assignment operator\n");
-
+        if(this->my_container != other.my_container || this->type != other.type)
+            throw runtime_error("Iterator can not be initialized to operator of different container/type \n");
+        
         this->index_order = other.index_order;
         this->position = other.position;
-        this->type = other.type;
         return *this;
     }
 
