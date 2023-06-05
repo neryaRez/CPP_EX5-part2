@@ -103,11 +103,7 @@ namespace ariel{
             PrimeIterator end();
 
         };
-
-       
         
     };
-
-
 
 }

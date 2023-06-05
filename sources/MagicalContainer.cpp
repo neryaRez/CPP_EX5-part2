@@ -267,18 +267,4 @@ namespace ariel{
 
         return en;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
